@@ -14,3 +14,16 @@ Reference for robotpy can be found here.
 
 Notes:
 * `pyproject.toml` is used to add 3rd party libraries.  After updating the file run `robotpy sync` to download new resources
+
+# Installing on MacOS
+```bash
+conda create -n robotpy310 python=3.10
+conda activate robotpy310
+python3 -m pip install robotpy
+```
+
+Commands2 does not seem to be installed by default.
+```bash
+pip install robotpy-commands-v2
+```
+
