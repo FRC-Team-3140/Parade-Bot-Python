@@ -7,7 +7,7 @@
 import wpilib
 import wpimath.controller
 import commands2
-import commands2.cmd
+import rev
 
 import constants
 
@@ -22,11 +22,12 @@ class ShooterSubsystem(commands2.PIDSubsystem):
             )
         )
 
-        self.shooterMotor = wpilib.PWMSparkMax(
-            constants.ShooterConstants.kShooterMotorPort
+        self.shooterMotor = rev.CANSparkMax(
+            constants.ShooterConstants.kShooterMotorPort, rev.CANSparkMax.MotorType.kBrushless
         )
-        self.feederMotor = wpilib.PWMSparkMax(
-            constants.ShooterConstants.kFeederMotorPort
+        self.feederMotor = rev.CANSparkMax(
+            # Feel free to change CANSparkMax back to PWMSparkMax, I just figured the bot would use CAN -GP
+            constants.ShooterConstants.kFeederMotorPort, rev.CANSparkMax.MotorType.kBrushless
         )
         self.shooterEncoder = wpilib.Encoder(
             constants.ShooterConstants.kEncoderPorts[0],

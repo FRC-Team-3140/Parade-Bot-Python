@@ -31,8 +31,7 @@ class MyRobot(commands2.TimedCommandRobot):
         This function is run when the robot is first started up and should be used for any
         initialization code.
         """
-        self.frame_id = 0
-        self.autonomousCommand: typing.Optional[commands.Command] = None
+        self.autonomousCommand: typing.Optional[commands2.Command] = None
 
         # Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         # autonomous chooser on the dashboard.
@@ -43,8 +42,6 @@ class MyRobot(commands2.TimedCommandRobot):
 
     def disabledPeriodic(self) -> None:
         """This function is called periodically when disabled"""
-        #print("disabledPeriodic", self.frame_id)
-
 
     def autonomousInit(self) -> None:
         """This autonomous runs the autonomous command selected by your RobotContainer class."""
@@ -58,7 +55,6 @@ class MyRobot(commands2.TimedCommandRobot):
 
     def autonomousPeriodic(self) -> None:
         """This function is called periodically during autonomous"""
-        #print("autonomousPeriodic", self.frame_id)
 
     def teleopInit(self) -> None:
         # This makes sure that the autonomous stops running when
@@ -70,14 +66,7 @@ class MyRobot(commands2.TimedCommandRobot):
 
     def teleopPeriodic(self) -> None:
         """This function is called periodically during operator control"""
-        #print("teleopPeriodic", self.frame_id)
 
     def testInit(self) -> None:
         # Cancels all running commands at the start of test mode
-        #commands.CommandScheduler.getInstance().cancelAll()
-        pass
-
-    def testPeriodic(self) -> None:
-        """This function is called periodically during test mode"""
-        #print("testPeriodic System time:", time.time() )
-        self.container.drive.arcadeDrive(1.0, 0.0)
+        commands2.CommandScheduler.getInstance().cancelAll()

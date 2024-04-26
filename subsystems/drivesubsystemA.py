@@ -82,11 +82,11 @@ class DriveSubsystemA(commands2.Subsystem):
 
 
         # Set the motors to brake when they are not getting signal
-        self.left_motor1.setIdleMode(CANSparkMax.IdleMode.kCoast)
+        self.left_motor1.setIdleMode(CANSparkMax.IdleMode.kBrake)
         #self.left_motor2.setNeutralMode(TalonSRX.NeutralMode.Brake)
         #self.left_motor3.setNeutralMode(TalonSRX.NeutralMode.Brake)
 
-        self.right_motor1.setIdleMode(CANSparkMax.IdleMode.kCoast)
+        self.right_motor1.setIdleMode(CANSparkMax.IdleMode.kBrake)
         #self.right_motor2.setNeutralMode(TalonSRX.NeutralMode.Brake)
         #self.right_motor3.setNeutralMode(TalonSRX.NeutralMode.Brake)
 
@@ -129,11 +129,11 @@ class DriveSubsystemA(commands2.Subsystem):
         every 50 calls print out the encoder values
         '''
         self.frame_id += 1
-        if self.frame_id % 50 == 0:
-            print("System Time:",time.time())
-            print("Left Encoder: ", self.leftEncoder.getPosition())
-            print("Right Encoder: ", self.rightEncoder.getPosition())
-            print("done")
+        #if self.frame_id % 50 == 0:
+            #print("System Time:",time.time())
+            #print("Left Encoder: ", self.leftEncoder.getPosition())
+            #print("Right Encoder: ", self.rightEncoder.getPosition())
+            #print("done")
 
     def arcadeDrive(self, fwd: float, rot: float):
         """
@@ -143,6 +143,12 @@ class DriveSubsystemA(commands2.Subsystem):
         :param rot: the commanded rotation
         """
         self.drive.arcadeDrive(fwd, rot)
+
+    def stop(self):
+        """
+        Stops the drive from moving.
+        """
+        self.arcadeDrive(0,0)
 
     def resetEncoders(self):
         """Resets the drive encoders to currently read a position of 0."""
