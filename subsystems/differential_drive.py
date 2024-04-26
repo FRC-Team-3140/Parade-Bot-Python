@@ -48,7 +48,7 @@ class TalonMotorController(wpilib.interfaces.MotorController):
 
 
 
-class DriveSubsystemA(commands2.Subsystem):
+class DifferentalDrive(commands2.Subsystem):
     def __init__(self) -> None:
         """Creates a new DriveSubsystem"""
         super().__init__()

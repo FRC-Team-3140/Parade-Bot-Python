@@ -2,10 +2,10 @@ import commands2
 import commands2.cmd
 from wpilib.interfaces import GenericHID
 from wpilib import XboxController
-from subsystems.drivesubsystemA import DriveSubsystemA
+from subsystems.differential_drive import DifferentalDrive
 
 class DriverControlCommand(commands2.CommandBase):
-    def __init__(self, drive_subsystem: DriveSubsystemA, controller: XboxController):
+    def __init__(self, drive_subsystem: DifferentalDrive, controller: XboxController):
         super().__init__()
         self.drive_subsystem = drive_subsystem
         self.controller = controller
@@ -13,8 +13,8 @@ class DriverControlCommand(commands2.CommandBase):
 
     def execute(self):
         # Get the x speed and the z rotation from the controller
-        x_speed = self.controller.getLeftY()
-        z_rotation = self.controller.getRightX()
+        x_speed = -self.controller.getLeftY()
+        z_rotation = -self.controller.getRightX()
 
         # Use the x speed and z rotation to drive the robot
         self.drive_subsystem.arcadeDrive(x_speed, z_rotation)

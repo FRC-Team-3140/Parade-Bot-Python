@@ -9,9 +9,9 @@
 #import commands2.cmd
 
 import subsystems.lightshow as ls
-import subsystems.drivesubsystemA as dsa
+import subsystems.differential_drive as dsa
 from wpilib import XboxController
-#from commands.drivercontrol import DriverControlCommand
+from commands.drivercontrol import DriverControlCommand
 
 # Copyright (c) FIRST and other WPILib contributors.
 # Open Source Software; you can modify and/or share it under the terms of
@@ -23,7 +23,7 @@ import commands2.cmd
 import commands2.button
 
 import constants
-import subsystems.drivesubsystemA
+import subsystems.differential_drive
 
 
 class RobotContainer:
@@ -40,7 +40,7 @@ class RobotContainer:
         # create lightshow
         self.lightshow = ls.Lightshow()
 
-        self.robotDrive = subsystems.drivesubsystemA.DriveSubsystemA()
+        self.robotDrive = subsystems.differential_drive.DifferentalDrive()
         
 
         # The driver's controller
@@ -51,17 +51,19 @@ class RobotContainer:
 
         # Configure default commands
         # Set the default drive command to split-stick arcade drive
-        self.robotDrive.setDefaultCommand(
-            # A split-stick arcade command, with forward/backward controlled by the left
-            # hand, and turning controlled by the right.
-            commands2.cmd.run(
-                lambda: self.robotDrive.arcadeDrive(
-                    -self.driverController.getLeftY(),
-                    -self.driverController.getRightX(),
-                ),
-                self.robotDrive,
-            )
-        )
+        # self.robotDrive.setDefaultCommand(
+        #     # A split-stick arcade command, with forward/backward controlled by the left
+        #     # hand, and turning controlled by the right.
+        #     commands2.cmd.run(
+        #         lambda: self.robotDrive.arcadeDrive(
+        #             -self.driverController.getLeftY(),
+        #             -self.driverController.getRightX(),
+        #         ),
+        #         self.robotDrive,
+        #     )
+        # )
+
+        self.robotDrive.setDefaultCommand( DriverControlCommand(self.robotDrive, self.driverController) )
 
 
 
