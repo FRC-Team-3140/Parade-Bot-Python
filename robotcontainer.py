@@ -27,18 +27,11 @@ import subsystems.differential_drive
 
 
 class RobotContainer:
-    """
-    This class is where the bulk of the robot should be declared. Since Command-based is a
-    "declarative" paradigm, very little robot logic should actually be handled in the :class:`.Robot`
-    periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
-    subsystems, commands, and button mappings) should be declared here.
-
-    """
 
     def __init__(self):
 
-        # create lightshow
         self.lightshow = ls.Lightshow()
+        self.lightshow_command = commands2.cmd.run(self.lightshow.periodic, self.lightshow)
 
         self.robotDrive = subsystems.differential_drive.DifferentalDrive()
         
@@ -122,4 +115,3 @@ class RobotContainer:
         :returns: the command to run in autonomous
         """
         return None
-
