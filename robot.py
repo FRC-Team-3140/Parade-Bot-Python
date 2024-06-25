@@ -21,10 +21,6 @@ the package after creating this project, you must also update the build.gradle f
 project.
 """
 class MyRobot(commands2.TimedCommandRobot):
-    """
-    Command v2 robots are encouraged to inherit from TimedCommandRobot, which
-    has an implementation of robotPeriodic which runs the scheduler for you
-    """
 
     def robotInit(self) -> None:
         """
@@ -36,6 +32,7 @@ class MyRobot(commands2.TimedCommandRobot):
         # Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         # autonomous chooser on the dashboard.
         self.container = robotcontainer.RobotContainer()
+        self.container.lightshow_command.schedule()  # Schedule the Lightshow command
 
     def disabledInit(self) -> None:
         """This function is called once each time the robot enters Disabled mode."""
